@@ -1,17 +1,21 @@
 {
-    "name": "Grosir 2023",
-    "short_name": "G23",
-    "description": "Aplikasi Toko Sembako Sederhana",
-    "start_url": "/",
-    "display": "standalone",
-    "background_color": "#ffffff",
-    "theme_color": "#1f3641",
-    "icons": [
+  "name": "Grosir Sembako",
+  "short_name": "Grosir Sembako",
+  "description": "Membuat Aplikasi Grosir Sembako sederhana dengan javascript PWA ",
+  "icons": [{
+          "src": "assets/images/1.png",
+          "sizes": "500x500",
+          "type": "image/png"
+      },
       {
-        "src": "/assets/image/1.png",
-        "sizes": "500x500",
-        "type": "image/png"
+          "src": "assets/images/1.png",
+          "sizes": "500x500",
+          "type": "image/png"
       }
-    ]
-  }
-  
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#1F3641",
+  "background_color": "#ffffff",
+  "prefer_related_applications": false
+}
