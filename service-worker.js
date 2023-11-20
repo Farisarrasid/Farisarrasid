@@ -14,33 +14,33 @@ const toCache = [
   "assets/js/script.js",
   "index.html",
 ];
+let deferredPrompt;
 
 self.addEventListener("beforeinstallprompt", (e) => {
   e.preventDefault();
   deferredPrompt = e;
-
   showInstallPromotion();
 });
+
 self.addEventListener('install', function (event) {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-    .then(function (cache) {
-      return cache.addAll(toCache)
-    })
-    .then(self.skipWaiting())
-  )
-})
+    self.skipWaiting();
+});
+
 self.addEventListener('fetch', function (event) {
-  event.respondWith(
-    fetch(event.request)
-    .catch(() => {
-      return caches.open(CACHE_NAME)
-        .then((cache) => {
-          return cache.match(event.request)
-        })
-    })
-  )
-})
+    event.respondWith(
+        fetch(event.request)
+            .then((response) => {
+                return caches.open(CACHE_NAME).then((cache) => {
+                    cache.put(event.request, response.clone());
+                    return response;
+                });
+            })
+            .catch(() => {
+              return caches.match(event.request);
+            })
+    );
+});
+
 self.addEventListener('activate', function (event) {
   event.waitUntil(
     caches.keys()
