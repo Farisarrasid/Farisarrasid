@@ -1,4 +1,4 @@
-const CACHE_NAME = "SW-001";
+const CACHE_NAME = "G23";
 const toCache = [
   "/",
   "manifest.json",
