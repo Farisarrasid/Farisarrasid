@@ -3,12 +3,12 @@
   "short_name": "Grosir Sembako",
   "description": "Membuat Aplikasi Grosir Sembako sederhana dengan javascript PWA ",
   "icons": [{
-          "src": "assets/images/1.png",
+          "src": "assets/image/1.png",
           "sizes": "500x500",
           "type": "image/png"
       },
       {
-          "src": "assets/images/1.png",
+          "src": "assets/image/1.png",
           "sizes": "500x500",
           "type": "image/png"
       }
