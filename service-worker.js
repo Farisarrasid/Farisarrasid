@@ -1,39 +1,58 @@
-// service-worker.js
-
 const cacheName = 'sembako-shop-v1';
 const filesToCache = [
-  '/',
-  '/assets/image/1.png',
-  '/manifest.json',
-  '/assets/js/register.js',
+  "/",
+  "manifest.json",
+  "assets/js/register.js",
+  "assets/css/bootstrap.css",
+  "assets/css/bootstrap.css.map",
+  "assets/css/styles.css",
+  "assets/images/calculator.png",
+  "assets/images/calculator-192.png",
+  "assets/js/bootstrap.js",
+  "assets/js/bootstrap.js.map",
+  "assets/js/jquery-3.3.1.slim.min.js",
+  "assets/js/script.js",
+  "index.html",
 ];
 
-self.addEventListener('install', (e) => {
-  e.waitUntil(
-    caches.open(cacheName).then((cache) => {
-      return cache.addAll(filesToCache);
-    })
-  );
-});
+self.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
 
-self.addEventListener('activate', (e) => {
-  e.waitUntil(
-    caches.keys().then((keyList) => {
-      return Promise.all(
-        keyList.map((key) => {
-          if (key !== cacheName) {
-            return caches.delete(key);
-          }
+  showInstallPromotion();
+});
+self.addEventListener('install', function (event) {
+  event.waitUntil(
+    caches.open(CACHE_NAME)
+    .then(function (cache) {
+      return cache.addAll(toCache)
+    })
+    .then(self.skipWaiting())
+  )
+})
+self.addEventListener('fetch', function (event) {
+  event.respondWith(
+    fetch(event.request)
+    .catch(() => {
+      return caches.open(CACHE_NAME)
+        .then((cache) => {
+          return cache.match(event.request)
         })
-      );
     })
-  );
-});
-
-self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    caches.match(e.request).then((response) => {
-      return response || fetch(e.request);
+  )
+})
+self.addEventListener('activate', function (event) {
+  event.waitUntil(
+    caches.keys()
+    .then((keyList) => {
+      return Promise.all(keyList.map((key) => {
+        if (key !== CACHE_NAME) {
+          console.log('[ServiceWorker] Hapus cache lama',
+            key)
+          return caches.delete(key)
+        }
+      }))
     })
-  );
-});
+    .then(() => self.clients.claim())
+  )
+})
