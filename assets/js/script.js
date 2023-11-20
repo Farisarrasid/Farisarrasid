@@ -7,7 +7,7 @@ var dataBarang = [{
   function showBarang() {
     var listBarang = document.getElementById("table");
   
-    listBarang.innerHTML = "<tr style='border-collapse:separate; text-align:center; background-color:orange'><th>Nama Barang</th><th>Jumlah</th><th>Total</th><th>Action</th></tr>";
+    listBarang.innerHTML = "<tr style='border-collapse:separate; text-align:center; background-color:orange; color:white'><th>Nama Barang</th><th>Jumlah</th><th>Total</th><th>Action</th></tr>";
   
     for (let i = 0; i < dataBarang.length; i++) {
       if (i !== 0) {
