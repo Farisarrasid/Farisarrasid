@@ -1,0 +1,17 @@
+{
+    "name": "Toko Sembako",
+    "short_name": "Sembako Shop",
+    "description": "Aplikasi Toko Sembako Sederhana",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#1f3641",
+    "icons": [
+      {
+        "src": "/assets/image/1.png",
+        "sizes": "500x500",
+        "type": "image/png"
+      }
+    ]
+  }
+  
